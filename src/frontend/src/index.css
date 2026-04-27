@@ -1,0 +1,616 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Font variables — Playfair Display + Source Sans 3 via Google Fonts CDN */
+    --font-display: "Playfair Display";
+    --font-body: "Source Sans 3";
+    --font-mono: "JetBrains Mono";
+    --radius: 0.5rem;
+
+    /* Light palette: white background, deep blue text */
+    --background: #ffffff;
+    --foreground: #0f3499;
+
+    --card: #ffffff;
+    --card-foreground: #0f3499;
+    --popover: #ffffff;
+    --popover-foreground: #0f3499;
+
+    /* primary = COEP Cobalt #1648C8 — nav, CTA, card accents */
+    --primary: #1648c8;
+    --primary-foreground: #ffffff;
+
+    /* secondary = Deep Blue #0F3499 — headings */
+    --secondary: #0f3499;
+    --secondary-foreground: #ffffff;
+
+    /* muted = light silver */
+    --muted: #f4f6fb;
+    --muted-foreground: #4b5e99;
+
+    /* accent = Bright Gold #E8C42A — primary buttons, active nav ONLY */
+    --accent: #e8c42a;
+    --accent-foreground: #081e5c;
+
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
+
+    --border: #dde3f0;
+    --input: #e8edf8;
+    --ring: #e8c42a;
+
+    --chart-1: #e8c42a;
+    --chart-2: #1648c8;
+    --chart-3: #0f3499;
+    --chart-4: #081e5c;
+    --chart-5: #e8c42a;
+
+    --sidebar: #ffffff;
+    --sidebar-foreground: #0f3499;
+    --sidebar-primary: #1648c8;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #e8c42a;
+    --sidebar-accent-foreground: #0f3499;
+    --sidebar-border: #dde3f0;
+    --sidebar-ring: #e8c42a;
+
+    /* Raw brand hex values as CSS custom properties */
+    --cobalt: #1648c8;
+    --deepblue: #0f3499;
+    --midnight: #081e5c;
+    --gold: #e8c42a;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  /* ── Logo image: never add a border, background, or shadow ── */
+  img[alt="COEP Technological University Logo"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  html {
+    /* Base font size increased by ~1.5 points */
+    font-size: 106.25%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    @apply bg-background text-foreground antialiased;
+    font-size: 1rem;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── Heading hierarchy — Playfair Display, Deep Blue #0F3499 ── */
+  h1 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #0f3499;
+  }
+  h2 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: #0f3499;
+  }
+  h3 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0em;
+    color: #0f3499;
+  }
+  h4 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0em;
+    color: #0f3499;
+  }
+  h5 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    font-weight: 600;
+    line-height: 1.4;
+    color: #0f3499;
+  }
+  h6 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: #0f3499;
+  }
+
+  p {
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  small {
+    font-size: 0.85rem;
+  }
+  button,
+  input,
+  select,
+  textarea,
+  label {
+    font-family: "Source Sans 3", system-ui, sans-serif;
+  }
+  a {
+    font-family: inherit;
+  }
+}
+
+/* ── JetBrains Mono from local assets (monospace fallback) ── */
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* ── Keyframe animations ── */
+@keyframes dropdown-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes imgReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes profileFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Utility layer ── */
+@layer utilities {
+  /* ── Scroll-triggered animation ── */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s
+      cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .animate-on-scroll.is-visible,
+  .animate-on-scroll.animate-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Stagger delays for sibling cards/items */
+  .animate-on-scroll:nth-child(1) {
+    transition-delay: 0s;
+  }
+  .animate-on-scroll:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+  .animate-on-scroll:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+  .animate-on-scroll:nth-child(4) {
+    transition-delay: 0.3s;
+  }
+  .animate-on-scroll:nth-child(5) {
+    transition-delay: 0.4s;
+  }
+  .animate-on-scroll:nth-child(6) {
+    transition-delay: 0.5s;
+  }
+  .animate-on-scroll:nth-child(7) {
+    transition-delay: 0.6s;
+  }
+  .animate-on-scroll:nth-child(8) {
+    transition-delay: 0.7s;
+  }
+
+  /* Slide-from-left variant */
+  .animate-from-left {
+    opacity: 0;
+    transform: translateX(-32px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s
+      cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .animate-from-left.is-visible,
+  .animate-from-left.animate-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Slide-from-right variant */
+  .animate-from-right {
+    opacity: 0;
+    transform: translateX(32px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s
+      cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .animate-from-right.is-visible,
+  .animate-from-right.animate-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Scale-in variant */
+  .animate-scale-in {
+    opacity: 0;
+    transform: scale(0.93);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s
+      cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .animate-scale-in.is-visible,
+  .animate-scale-in.animate-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* ── Transition helpers ── */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .transition-fast {
+    transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ── Dropdown animation ── */
+  .animate-dropdown-enter {
+    animation: dropdown-enter 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  /* ── Brand color utilities ── */
+  .bg-cobalt {
+    background-color: #1648c8;
+  }
+  .bg-cobalt-dark {
+    background-color: #1238a8;
+  }
+  .text-cobalt {
+    color: #1648c8;
+  }
+
+  .bg-deepblue {
+    background-color: #0f3499;
+  }
+  .text-deepblue {
+    color: #0f3499;
+  }
+
+  .bg-midnight {
+    background-color: #081e5c;
+  }
+  .text-midnight {
+    color: #081e5c;
+  }
+
+  .bg-gold-accent {
+    background-color: #e8c42a;
+  }
+  .text-gold-accent {
+    color: #e8c42a;
+  }
+  .text-accent-gold {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #e8c42a;
+  }
+
+  /* ── Section backgrounds ── */
+  .section-light {
+    @apply bg-background text-foreground;
+  }
+  .section-cobalt {
+    background-color: #1648c8;
+    color: #ffffff;
+  }
+  .section-cobalt h1,
+  .section-cobalt h2,
+  .section-cobalt h3,
+  .section-cobalt h4,
+  .section-cobalt h5,
+  .section-cobalt h6 {
+    color: #ffffff;
+  }
+  .section-navy {
+    background-color: #1648c8;
+    color: #ffffff;
+  }
+  .section-deep-blue {
+    background-color: #0f3499;
+    color: #ffffff;
+  }
+  .section-deep-blue h1,
+  .section-deep-blue h2,
+  .section-deep-blue h3,
+  .section-deep-blue h4 {
+    color: #ffffff;
+  }
+  .section-midnight {
+    background-color: #081e5c;
+    color: #ffffff;
+  }
+  .section-midnight h1,
+  .section-midnight h2,
+  .section-midnight h3,
+  .section-midnight h4 {
+    color: #ffffff;
+  }
+
+  /* ── Stats number style ── */
+  .stat-number {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1;
+    color: #e8c42a;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* ── Premium button styles ── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #e8c42a;
+    color: #081e5c;
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    padding: 0.75rem 1.75rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease, box-shadow
+      0.25s ease;
+  }
+  .btn-primary:hover {
+    background-color: #f0d040;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232, 196, 42, 0.45);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #1648c8;
+    color: #ffffff;
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease, box-shadow
+      0.25s ease;
+  }
+  .btn-secondary:hover {
+    background-color: #1238a8;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(22, 72, 200, 0.35);
+  }
+
+  .btn-ghost-white {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: #ffffff;
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.72rem 1.7rem;
+    border-radius: 0.375rem;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .btn-ghost-white:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #ffffff;
+  }
+
+  /* ── Active nav item ── */
+  .btn-nav-active {
+    color: #e8c42a;
+    border-bottom: 3px solid #e8c42a;
+  }
+  .nav-underline {
+    @apply pb-2 border-b-2 border-transparent;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .nav-underline:hover {
+    border-bottom-color: #e8c42a;
+    color: #e8c42a;
+  }
+
+  /* ── Premium card ── */
+  .card-elevated {
+    @apply bg-card border border-border rounded-2xl;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s
+      cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .card-elevated:hover {
+    box-shadow: 0 12px 40px rgba(22, 72, 200, 0.2);
+    transform: translateY(-4px);
+  }
+
+  .card-premium {
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s
+      cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+  .card-premium:hover {
+    box-shadow: 0 12px 40px rgba(22, 72, 200, 0.2);
+    transform: translateY(-4px);
+  }
+
+  /* ── Section divider ── */
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #1648c8 30%,
+      #1648c8 70%,
+      transparent 100%
+    );
+    opacity: 0.25;
+    margin: 0;
+  }
+
+  /* ── Gradient text ── */
+  .text-gradient-cobalt {
+    background: linear-gradient(135deg, #1648c8 0%, #0f3499 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #e8c42a 0%, #c9a820 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Parallax container ── */
+  .parallax-bg {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* ── Premium shimmer loading effect ── */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2.5s linear infinite;
+  }
+
+  /* ── Letter spacing utilities ── */
+  .tracking-heading {
+    letter-spacing: -0.02em;
+  }
+  .tracking-subhead {
+    letter-spacing: 0.02em;
+  }
+  .tracking-caps {
+    letter-spacing: 0.08em;
+  }
+  .tracking-wide-caps {
+    letter-spacing: 0.12em;
+  }
+
+  /* ── No scrollbar utility ── */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

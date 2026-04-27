@@ -1,0 +1,21 @@
+// Version: 1.0.0
+type AcademicCategory__286022363 = {#curriculum; #exam_schedule; #timetable};
+type AcademicResource__944258648 =
+  {
+    category : AcademicCategory__286022363;
+    description : Text;
+    id : Text;
+    storageKey : Text;
+    title : Text;
+    uploadedAt : Int
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+actor {
+  stable resources :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AcademicResource__944258648]];
+      var elementIndex : Nat__490723111
+    }
+};

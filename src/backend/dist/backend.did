@@ -1,0 +1,22 @@
+type AcademicResource = 
+ record {
+   category: AcademicCategory;
+   description: text;
+   id: text;
+   storageKey: text;
+   title: text;
+   uploadedAt: int;
+ };
+type AcademicCategory = 
+ variant {
+   curriculum;
+   exam_schedule;
+   timetable;
+ };
+service : {
+  addAcademicResource: (title: text, category: AcademicCategory, description:
+   text, storageKey: text) -> (AcademicResource);
+  deleteAcademicResource: (id: text) -> (bool);
+  getAcademicResources: (category: opt AcademicCategory) ->
+   (vec AcademicResource) query;
+}
